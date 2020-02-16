@@ -21,8 +21,8 @@ routes.post('/session', SessionController.store);
 routes.use(authMiddleware);
 
 /** recipient */
-routes.post('/recipient', RecipientController.store);
-routes.put('/recipient/:id', RecipientController.update);
+routes.post('/recipients', RecipientController.store);
+routes.put('/recipients/:id', RecipientController.update);
 
 routes.post('/files', upload.single('file'), FileController.store);
 
