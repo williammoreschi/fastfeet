@@ -8,6 +8,7 @@ import FileController from './app/controllers/FileController';
 import DeliverymanController from './app/controllers/DeliverymanController';
 import DeliveryController from './app/controllers/DeliveryController';
 import StarDeliveryController from './app/controllers/StarDeliveryController';
+import EndDeliveryController from './app/controllers/EndDeliveryController';
 
 import authMiddleware from './app/middlwares/auth';
 
@@ -21,8 +22,13 @@ routes.get('/', (req, res) => {
 routes.post('/session', SessionController.store);
 
 routes.put(
-  '/deliveries/:deliveryId/deliveryman/:deliverymanId',
+  '/deliveryman/:deliverymanId/star/delivery/:deliveryId',
   StarDeliveryController.update
+);
+routes.put(
+  '/deliveryman/:deliverymanId/end/delivery/:deliveryId',
+  upload.single('file'),
+  EndDeliveryController.update
 );
 
 routes.use(authMiddleware);

@@ -41,7 +41,7 @@ class StarDeliveryController {
     if (!delivery) {
       return res
         .status(400)
-        .json({ error: 'Delivery not exists or has started ' });
+        .json({ error: 'Delivery not exists or has started' });
     }
 
     const date = new Date();
