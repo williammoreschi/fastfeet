@@ -3,8 +3,8 @@ import Delivery from '../models/Delivery';
 import File from '../models/File';
 import Recipient from '../models/Recipient';
 import Deliveryman from '../models/Deliveryman';
-
-import Mail from '../../lib/Mail';
+import NewDeliveryMail from '../jobs/NewDeliveryMail';
+import Queue from '../../lib/Queue';
 
 class DeliveryController {
   async index(req, res) {
@@ -59,20 +59,7 @@ class DeliveryController {
 
     const { id, product } = await Delivery.create(req.body);
 
-    await Mail.sendMail({
-      to: `${deliveryman.name} <${deliveryman.email}>`,
-      subject: 'Nova entrega',
-      template: 'newDelivery',
-      context: {
-        deliveryman: deliveryman.name,
-        recipient: recipient.name,
-        product,
-        recipientAddress: `${recipient.street}, ${recipient.number}`,
-        recipientComplement: `${recipient.complement}`,
-        recipientZipCode: `${recipient.zip_code}`,
-        recipientCityState: `${recipient.city} - ${recipient.state}`,
-      },
-    });
+    await Queue.add(NewDeliveryMail.key, { deliveryman, recipient, product });
 
     return res.json({ id, product, recipient_id, deliveryman_id });
   }

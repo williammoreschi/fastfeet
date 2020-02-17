@@ -10,13 +10,16 @@
   <strong>Dados da entreaga</strong>
   <br />
   <br />
-  <strong>Endereço: </strong> {{recipientAddress}}
+  <strong>Endereço: </strong> {{recipientStreet}} , {{recipientNumber}}
   <br />
+  {{#if recipientComplement}}
   <strong>Complemento: </strong> {{recipientComplement}}
   <br />
+  {{/if}}
   <strong>CEP: </strong> {{recipientZipCode}}
   <br />
-  <strong>Cidade - UF: </strong> {{recipientCityState}}
+  <strong>Cidade - UF: </strong> {{recipientCity}} - {{recipientState}}
+  <br />
   <br />
   <strong>Estamos esperando por você!</strong>
 </p>
