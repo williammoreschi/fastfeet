@@ -7,6 +7,7 @@ import RecipientController from './app/controllers/RecipientController';
 import FileController from './app/controllers/FileController';
 import DeliverymanController from './app/controllers/DeliverymanController';
 import DeliveryController from './app/controllers/DeliveryController';
+import StarDeliveryController from './app/controllers/StarDeliveryController';
 
 import authMiddleware from './app/middlwares/auth';
 
@@ -18,6 +19,11 @@ routes.get('/', (req, res) => {
 });
 
 routes.post('/session', SessionController.store);
+
+routes.put(
+  '/deliveries/:deliveryId/deliveryman/:deliverymanId',
+  StarDeliveryController.update
+);
 
 routes.use(authMiddleware);
 

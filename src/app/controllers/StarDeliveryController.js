@@ -13,17 +13,16 @@ import Delivery from '../models/Delivery';
 
 class StarDeliveryController {
   async update(req, res) {
-    const { deliverymanId, deliveryId } = req.params;
-
+    const { deliveryId, deliverymanId } = req.params;
     const deliveryman = await Deliveryman.findByPk(deliverymanId);
-    if (deliveryman) {
+    if (!deliveryman) {
       return res.status(400).json({ error: 'Delivery man not exists' });
     }
 
     const delivery = await Delivery.findOne({
       where: {
         id: deliveryId,
-        deliveryman_id: deliveryId,
+        deliveryman_id: deliverymanId,
         canceled_at: null,
         start_date: null,
         end_date: null,
@@ -39,7 +38,7 @@ class StarDeliveryController {
         'signature_id',
       ],
     });
-    if (delivery) {
+    if (!delivery) {
       return res
         .status(400)
         .json({ error: 'Delivery not exists or has started ' });
@@ -48,11 +47,11 @@ class StarDeliveryController {
     const date = new Date();
 
     const startOfBusiness = setSeconds(setMinutes(setHours(date, 8), 0), 0);
-    const endOfBusiness = setSeconds(setMinutes(setHours(date, 18), 0), 0);
+    const endOfBusiness = setSeconds(setMinutes(setHours(date, 23), 0), 0);
 
     if (!(isAfter(date, startOfBusiness) && isBefore(date, endOfBusiness))) {
       return res.status(400).json({
-        error: 'you can only pick up your order between 8:00 and 18:00',
+        error: 'you can only pick up your order between 8:00 and 23:00',
       });
     }
 
