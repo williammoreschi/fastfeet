@@ -6,12 +6,12 @@ class DeliverymanController {
   async index(req, res) {
     const { page = 1 } = req.query;
     const deliverymen = await Deliveryman.findAll({
-      attributes: ['id', 'name', 'email', 'avatar_id'],
+      attributes: ['id', 'name', 'email'],
       include: [
         {
           model: File,
           as: 'avatar',
-          attributes: ['name', 'path', 'url'],
+          attributes: ['path', 'url'],
         },
       ],
       offset: (page - 1) * 20,
@@ -48,12 +48,12 @@ class DeliverymanController {
     if (avatar_id) {
       const deliveryman = await Deliveryman.findOne({
         where: { id },
-        attributes: ['id', 'name', 'email', 'avatar_id'],
+        attributes: ['id', 'name', 'email'],
         include: [
           {
             model: File,
             as: 'avatar',
-            attributes: ['name', 'path', 'url'],
+            attributes: ['path', 'url'],
           },
         ],
       });
@@ -98,12 +98,12 @@ class DeliverymanController {
     if (avatar_id) {
       const deliveryman = await Deliveryman.findOne({
         where: { id },
-        attributes: ['id', 'name', 'email', 'avatar_id'],
+        attributes: ['id', 'name', 'email'],
         include: [
           {
             model: File,
             as: 'avatar',
-            attributes: ['name', 'path', 'url'],
+            attributes: ['path', 'url'],
           },
         ],
       });
