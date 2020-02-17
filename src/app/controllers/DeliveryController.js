@@ -61,7 +61,7 @@ class DeliveryController {
 
     await Queue.add(NewDeliveryMail.key, { deliveryman, recipient, product });
 
-    return res.json({ id, product, recipient_id, deliveryman_id });
+    return res.status(201).json({ id, product, recipient_id, deliveryman_id });
   }
 
   async update(req, res) {

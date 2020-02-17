@@ -28,7 +28,7 @@ class RecipientController {
       zip_code,
     } = await Recipient.create(req.body);
 
-    return res.json({
+    return res.status(201).json({
       id,
       name,
       street,
