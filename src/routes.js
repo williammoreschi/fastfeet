@@ -9,6 +9,7 @@ import DeliverymanController from './app/controllers/DeliverymanController';
 import DeliveryController from './app/controllers/DeliveryController';
 import StarDeliveryController from './app/controllers/StarDeliveryController';
 import EndDeliveryController from './app/controllers/EndDeliveryController';
+import DeliverymanDeliveryController from './app/controllers/DeliverymanDeliveryController';
 
 import authMiddleware from './app/middlwares/auth';
 
@@ -20,6 +21,8 @@ routes.get('/', (req, res) => {
 });
 
 routes.post('/session', SessionController.store);
+
+routes.get('/deliveryman/:id/deliveries', DeliverymanDeliveryController.store);
 
 routes.put(
   '/deliveryman/:deliverymanId/star/delivery/:deliveryId',
