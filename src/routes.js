@@ -22,7 +22,7 @@ routes.get('/', (req, res) => {
 
 routes.post('/session', SessionController.store);
 
-routes.get('/deliveryman/:id/deliveries', DeliverymanDeliveryController.store);
+routes.get('/deliveryman/:id/deliveries', DeliverymanDeliveryController.index);
 
 routes.put(
   '/deliveryman/:deliverymanId/star/delivery/:deliveryId',

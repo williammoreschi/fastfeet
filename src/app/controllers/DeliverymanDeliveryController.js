@@ -5,7 +5,7 @@ import Recipient from '../models/Recipient';
 import File from '../models/File';
 
 class DeliverymanDeliveryController {
-  async store(req, res) {
+  async index(req, res) {
     const { id: deliverymanId } = req.params;
     const { page = 1, filter = null } = req.query;
 
