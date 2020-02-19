@@ -30,16 +30,17 @@ class EndDeliveryController {
         .json({ error: 'Delivery not exists or has finished' });
     }
 
+    let newFile = null;
     if (req.file) {
       const { filename: path, originalname: name } = req.file;
-      const newFile = await File.create({
+      newFile = await File.create({
         path,
         name,
       });
     }
 
     const finishedDelivery = await delivery.update({
-      signature_id: req.file ? newFile.id : null,
+      signature_id: newFile ? newFile.id : null,
       end_date: new Date(),
     });
 
