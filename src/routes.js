@@ -10,6 +10,7 @@ import DeliveryController from './app/controllers/DeliveryController';
 import StarDeliveryController from './app/controllers/StarDeliveryController';
 import EndDeliveryController from './app/controllers/EndDeliveryController';
 import DeliverymanDeliveryController from './app/controllers/DeliverymanDeliveryController';
+import DeliveryProblemController from './app/controllers/DeliveryProblemController';
 
 import authMiddleware from './app/middlwares/auth';
 
@@ -25,13 +26,25 @@ routes.post('/session', SessionController.store);
 routes.get('/deliveryman/:id/deliveries', DeliverymanDeliveryController.index);
 
 routes.put(
-  '/deliveryman/:deliverymanId/star/delivery/:deliveryId',
+  '/deliveryman/:deliverymanId/star-delivery/:deliveryId',
   StarDeliveryController.update
 );
 routes.put(
-  '/deliveryman/:deliverymanId/end/delivery/:deliveryId',
+  '/deliveryman/:deliverymanId/end-delivery/:deliveryId',
   upload.single('file'),
   EndDeliveryController.update
+);
+
+routes.post(
+  '/deliveryman/:deliverymanId/problems',
+  DeliveryProblemController.store
+);
+
+routes.get('/deliveryproblem', DeliveryProblemController.index);
+routes.get('/deliveryproblem/:deliveryId', DeliveryProblemController.show);
+routes.delete(
+  '/deliveryproblem/:deliveryProblemId',
+  DeliveryProblemController.delete
 );
 
 routes.use(authMiddleware);
