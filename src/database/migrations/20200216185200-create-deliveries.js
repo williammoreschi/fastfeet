@@ -5,7 +5,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
-        primarykey: true,
+        primaryKey: true,
       },
       recipient_id: {
         type: Sequelize.INTEGER,
