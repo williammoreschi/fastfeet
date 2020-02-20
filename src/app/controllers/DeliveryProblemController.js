@@ -138,19 +138,20 @@ class DeliveryProblemController {
         .status(400)
         .json({ error: 'This delivery problem does not exist' });
     }
-    const delivery = await Delivery.findByPk(problemDelivery.delivery.id);
 
-    const canceledDelivery = await delivery.update(
+    const canceledDelivery = await Delivery.update(
       {
         canceled_at: new Date(),
       },
-      { id: problemDelivery.delivery.id }
+      {
+        where: { id: problemDelivery.delivery.id },
+      }
     );
 
     // Envia o email ao entregador
     await Queue.add(CanceledDeliveryMail.key, problemDelivery);
 
-    return res.json(canceledDelivery);
+    return res.json({ canceled: !!canceledDelivery });
   }
 }
 
